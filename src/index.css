@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Global Reset & Tokens ─────────────────────────────────────────────────── */
+:root {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* SIAD Pillar colors */
+  --siad-s: #B8891A;   /* Stewardship — gold */
+  --siad-i: #148585;   /* Incarnation  — teal */
+  --siad-a: #D4472E;   /* Activism     — coral */
+  --siad-d: #4E7D4C;   /* Discipleship — sage */
+
+  /* Status colors */
+  --status-active:      #4E7D4C;
+  --status-progress:    #B8891A;
+  --status-hold:        #6B6B8F;
+  --status-complete:    #148585;
+  --status-notstarted:  #4A4A6A;
+  --status-blocked:     #D4472E;
+}
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  html {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    background-color: #0A0A0F;
+    color: #E8E8F0;
+    margin: 0;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #32324A; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #4A4A6A; }
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184,137,26,0); }
+  50%       { box-shadow: 0 0 0 6px rgba(184,137,26,0.15); }
+}
+
+.animate-fade-up   { animation: fadeUp 0.4s ease forwards; }
+.animate-fade-in   { animation: fadeIn 0.3s ease forwards; }
+
+/* Staggered reveal delays */
+.delay-1 { animation-delay: 0.05s; opacity: 0; }
+.delay-2 { animation-delay: 0.10s; opacity: 0; }
+.delay-3 { animation-delay: 0.15s; opacity: 0; }
+.delay-4 { animation-delay: 0.20s; opacity: 0; }
+.delay-5 { animation-delay: 0.25s; opacity: 0; }
+
+/* ── Skeleton Loading ───────────────────────────────────────────────────────── */
+.skeleton {
+  background: linear-gradient(90deg, #1A1A24 25%, #242432 50%, #1A1A24 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}
+
+/* ── SIAD Pillar Tags ───────────────────────────────────────────────────────── */
+.tag-s { background: rgba(184,137,26,0.15); color: #E8C547; border: 1px solid rgba(184,137,26,0.3); }
+.tag-i { background: rgba(20,133,133,0.15); color: #7ACECE; border: 1px solid rgba(20,133,133,0.3); }
+.tag-a { background: rgba(212,71,46,0.15);  color: #F2A898; border: 1px solid rgba(212,71,46,0.3); }
+.tag-d { background: rgba(78,125,76,0.15);  color: #A8CBA6; border: 1px solid rgba(78,125,76,0.3); }
+
+/* ── Card Base ──────────────────────────────────────────────────────────────── */
+.card {
+  background: #1A1A24;
+  border: 1px solid #242432;
+  border-radius: 12px;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.card:hover { border-color: #32324A; }
+.card-interactive:hover {
+  border-color: rgba(184,137,26,0.4);
+  transform: translateY(-1px);
+}
+
+/* ── Nav Active States ──────────────────────────────────────────────────────── */
+.nav-active {
+  background: rgba(184,137,26,0.1);
+  border-left: 2px solid #B8891A;
+  color: #E8C547;
+}
+
+/* ── Progress Bar ───────────────────────────────────────────────────────────── */
+.progress-track {
+  background: #242432;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── AI Research Bar ────────────────────────────────────────────────────────── */
+.ai-glow {
+  box-shadow: 0 0 0 1px rgba(184,137,26,0.3), 0 0 20px rgba(184,137,26,0.08);
+}
+.ai-glow:focus-within {
+  box-shadow: 0 0 0 1px rgba(184,137,26,0.6), 0 0 30px rgba(184,137,26,0.15);
+  animation: pulse-gold 2s infinite;
+}
+
+/* ── Divider ────────────────────────────────────────────────────────────────── */
+.divider {
+  border: none;
+  border-top: 1px solid #242432;
+}
+
+/* ── Status Badge ───────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
