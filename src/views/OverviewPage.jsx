@@ -53,7 +53,7 @@ export default function OverviewPage() {
     name: stage,
     value: grants.filter(g => g.props?.Stage === stage).length,
   })).filter(d => d.value > 0)
-  const pieColors = { Researching:'#6B6B8F', Writing:GOLD, Submitted:TEAL, Awarded:SAGE, Declined:CORAL, 'On Hold':'#4A4A6A' }
+  const pieColors = { Researching:'#6B6B8F', Writing:GOLD, Submitted:TEAL, Awarded:SAGE, Declined:CORAL, 'On Hold':'var(--text-muted)' }
 
   if (loading) return (
     <div className="p-8 space-y-6">
@@ -113,9 +113,9 @@ export default function OverviewPage() {
           <SectionHeader title="Word Count" subtitle="Current vs. goal by chapter" />
           <ResponsiveContainer width="100%" height={220}>
             <BarChart data={chapterChartData} barGap={2} barSize={14}>
-              <XAxis dataKey="name" tick={{ fontSize: 9, fill: '#4A4A6A', fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 9, fill: '#4A4A6A', fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
-              <Tooltip contentStyle={{ background: '#1A1A24', border: '1px solid #32324A', borderRadius: 8, fontSize: 11 }} labelStyle={{ color: '#C4C4D4' }} />
+              <XAxis dataKey="name" tick={{ fontSize: 9, fill: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fontSize: 9, fill: 'var(--text-muted)', fontFamily: 'JetBrains Mono' }} axisLine={false} tickLine={false} />
+              <Tooltip contentStyle={{ background: 'var(--bg-surface)', border: '1px solid #32324A', borderRadius: 8, fontSize: 11 }} labelStyle={{ color: 'var(--text-secondary)' }} />
               <Bar dataKey="goal" fill="#1A1A24" stroke="#32324A" strokeWidth={1} radius={[2,2,0,0]} name="Goal" />
               <Bar dataKey="words" fill={GOLD} radius={[2,2,0,0]} name="Written" opacity={0.85} />
             </BarChart>
@@ -145,7 +145,7 @@ export default function OverviewPage() {
             <div className="flex items-center gap-4">
               <PieChart width={100} height={100}>
                 <Pie data={grantPieData} cx={45} cy={45} innerRadius={28} outerRadius={45} dataKey="value" strokeWidth={0}>
-                  {grantPieData.map(entry => <Cell key={entry.name} fill={pieColors[entry.name] || '#4A4A6A'} />)}
+                  {grantPieData.map(entry => <Cell key={entry.name} fill={pieColors[entry.name] || 'var(--text-muted)'} />)}
                 </Pie>
               </PieChart>
               <div className="space-y-1.5 flex-1">

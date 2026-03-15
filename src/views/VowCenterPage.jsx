@@ -22,7 +22,7 @@ function ProgramCard({ program, isAdmin, onVisibilityToggle, onStatusChange }) {
               <p className="text-sm text-ink-200 font-medium">{p['Program Name'] || 'Unnamed'}</p>
               {p['Initiative Type'] && (
                 <span className="text-[9px] font-mono text-ink-600 px-1.5 py-0.5 rounded"
-                  style={{ background: '#242432', border: '1px solid #32324A' }}>{p['Initiative Type']}</span>
+                  style={{ background: 'var(--bg-raised)', border: '1px solid #32324A' }}>{p['Initiative Type']}</span>
               )}
             </div>
             <SiadTags pillars={p['SIAD Pillar'] || []} />
@@ -64,7 +64,7 @@ function ProgramCard({ program, isAdmin, onVisibilityToggle, onStatusChange }) {
 function MilestoneRow({ milestone, isAdmin, onVisibilityToggle }) {
   const p = milestone.props || {}
   const visible = p['Visible on Dashboard']
-  const dotColor = { Completed: '#6FA06C', Active: '#6FA06C', 'In Progress': '#D4A829', 'Not Started': '#4A4A6A', Blocked: '#E8705A', 'On Hold': '#9494AF' }[p.Status] || '#4A4A6A'
+  const dotColor = { Completed: '#6FA06C', Active: '#6FA06C', 'In Progress': '#D4A829', 'Not Started': 'var(--text-muted)', Blocked: '#E8705A', 'On Hold': '#9494AF' }[p.Status] || 'var(--text-muted)'
   return (
     <div className={`flex items-start gap-3 py-3 border-b border-ink-800 last:border-0 transition-opacity ${!visible && isAdmin ? 'opacity-40' : ''}`}>
       <div className="mt-1.5 w-2 h-2 rounded-full shrink-0" style={{ background: dotColor }} />
@@ -188,7 +188,7 @@ export default function VowCenterPage() {
                 const count = items.filter(m => m.props?.Status === s).length
                 const pct = items.length ? Math.round((count / items.length) * 100) : 0
                 if (!count) return null
-                const color = { Completed: '#6FA06C', 'In Progress': '#D4A829', Blocked: '#E8705A', 'Not Started': '#4A4A6A' }[s]
+                const color = { Completed: '#6FA06C', 'In Progress': '#D4A829', Blocked: '#E8705A', 'Not Started': 'var(--text-muted)' }[s]
                 return (
                   <div key={s} className="flex items-center gap-2 mb-2">
                     <span className="text-[9px] font-mono text-ink-600 w-20 shrink-0">{s}</span>

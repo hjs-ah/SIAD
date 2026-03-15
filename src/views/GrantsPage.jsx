@@ -7,7 +7,7 @@ import { Plus, ExternalLink, DollarSign } from 'lucide-react'
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts'
 
 const STAGES = ['Researching','Writing','Submitted','Awarded','Declined','On Hold']
-const STAGE_COLORS = { Researching: '#6B6B8F', Writing: '#B8891A', Submitted: '#148585', Awarded: '#4E7D4C', Declined: '#D4472E', 'On Hold': '#4A4A6A' }
+const STAGE_COLORS = { Researching: '#6B6B8F', Writing: '#B8891A', Submitted: '#148585', Awarded: '#4E7D4C', Declined: '#D4472E', 'On Hold': 'var(--text-muted)' }
 const ALIGNMENTS = ['VOW Center Programs','Truth Bible Institute','Dissertation Research','General Operations','Youth Development']
 
 function AddGrantForm({ onAdded, onCancel }) {
@@ -64,7 +64,7 @@ function AddGrantForm({ onAdded, onCancel }) {
               className="text-[10px] px-3 py-1 rounded-full font-mono transition-all"
               style={form.alignment.includes(a)
                 ? { background: 'rgba(184,137,26,0.2)', border: '1px solid rgba(184,137,26,0.4)', color: '#E8C547' }
-                : { background: '#1A1A24', border: '1px solid #32324A', color: '#6B6B8F' }}>
+                : { background: 'var(--bg-surface)', border: '1px solid #32324A', color: 'var(--text-muted)' }}>
               {a}
             </button>
           ))}
@@ -122,7 +122,7 @@ function GrantCard({ grant, isAdmin, onStageChange }) {
         <div className="flex flex-wrap gap-1 mb-3">
           {p['Alignment'].map(a => (
             <span key={a} className="text-[9px] px-2 py-0.5 rounded font-mono text-ink-500"
-              style={{ background: '#1A1A24', border: '1px solid #32324A' }}>{a}</span>
+              style={{ background: 'var(--bg-surface)', border: '1px solid #32324A' }}>{a}</span>
           ))}
         </div>
       )}
@@ -221,7 +221,7 @@ export default function GrantsPage() {
                   <Pie data={pieData} cx="50%" cy="50%" innerRadius={35} outerRadius={58} dataKey="value" strokeWidth={0}>
                     {pieData.map(entry => <Cell key={entry.name} fill={STAGE_COLORS[entry.name]} />)}
                   </Pie>
-                  <Tooltip contentStyle={{ background: '#1A1A24', border: '1px solid #32324A', fontSize: 11, borderRadius: 8 }} />
+                  <Tooltip contentStyle={{ background: 'var(--bg-surface)', border: '1px solid #32324A', fontSize: 11, borderRadius: 8 }} />
                 </PieChart>
               </ResponsiveContainer>
               <div className="space-y-2 mt-2">

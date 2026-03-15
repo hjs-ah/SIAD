@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
+import { Sun, Moon } from 'lucide-react'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const { login } = useAuth()
+  const { isDark, toggle } = useTheme()
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -19,49 +22,37 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden"
-      style={{ background: '#0A0A0F' }}>
+    <div className="min-h-screen flex items-center justify-center relative"
+      style={{ background: 'var(--bg-base)' }}>
 
-      {/* Background geometry */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-96 opacity-10"
-          style={{ background: 'linear-gradient(to bottom, #B8891A, transparent)' }} />
-        <div className="absolute top-40 left-1/2 -translate-x-1/2 w-96 h-px opacity-10"
-          style={{ background: 'linear-gradient(to right, transparent, #B8891A, transparent)' }} />
-        <svg className="absolute bottom-0 left-0 w-full opacity-5" viewBox="0 0 1440 200" preserveAspectRatio="none">
-          <path d="M0,100 L360,60 L720,120 L1080,40 L1440,100 L1440,200 L0,200 Z" fill="#B8891A" />
-        </svg>
-      </div>
+      {/* Theme toggle */}
+      <button onClick={toggle}
+        className="absolute top-5 right-5 w-8 h-8 rounded-full flex items-center justify-center transition-all"
+        style={{ background: 'var(--bg-surface)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)' }}>
+        {isDark ? <Sun size={14} /> : <Moon size={14} />}
+      </button>
 
       <div className="w-full max-w-sm mx-auto px-6 animate-fade-up">
-        {/* Wordmark */}
+        {/* Mark */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5"
-            style={{ background: 'rgba(184,137,26,0.15)', border: '1px solid rgba(184,137,26,0.3)' }}>
-            <span className="text-xl text-gold-300">✦</span>
+          <div className="inline-flex items-center justify-center w-11 h-11 rounded-xl mb-5"
+            style={{ background: 'var(--gold-bg)', border: '1px solid var(--border-mid)' }}>
+            <span style={{ color: 'var(--gold-main)', fontSize: '18px' }}>✦</span>
           </div>
-          <h1 className="text-3xl text-ink-100 mb-1" style={{ fontFamily: 'var(--font-display)', fontWeight: 300 }}>
+          <h1 className="text-2xl font-semibold mb-1" style={{ color: 'var(--text-primary)' }}>
             Dissertation Dashboard
           </h1>
-          <p className="text-xs text-ink-500 font-mono tracking-widest uppercase">
+          <p className="text-xs font-mono tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>
             SIAD Framework · VOW Center · Hampton University
           </p>
         </div>
 
         {/* SIAD bar */}
         <div className="flex gap-1 mb-8">
-          {[
-            ['S', '#B8891A', 'Stewardship'],
-            ['I', '#148585', 'Incarnation'],
-            ['A', '#D4472E', 'Activism'],
-            ['D', '#4E7D4C', 'Discipleship'],
-          ].map(([l, c, name]) => (
-            <div key={l} className="flex-1 relative group cursor-default">
-              <div className="h-px w-full mb-1.5 rounded-full" style={{ background: c }} />
-              <p className="text-[9px] font-mono text-ink-600 text-center tracking-wider
-                           group-hover:text-ink-400 transition-colors">
-                {l}
-              </p>
+          {[['#B8891A','S'],['#148585','I'],['#D4472E','A'],['#4E7D4C','D']].map(([c, l]) => (
+            <div key={l} className="flex-1">
+              <div className="h-0.5 rounded-full mb-1.5" style={{ background: c }} />
+              <p className="text-[9px] font-mono text-center tracking-widest" style={{ color: 'var(--text-muted)' }}>{l}</p>
             </div>
           ))}
         </div>
@@ -69,7 +60,8 @@ export default function LoginPage() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-xs text-ink-400 font-mono uppercase tracking-widest mb-2">
+            <label className="block text-xs font-mono uppercase tracking-widest mb-1.5"
+              style={{ color: 'var(--text-muted)' }}>
               Email Address
             </label>
             <input
@@ -78,41 +70,38 @@ export default function LoginPage() {
               onChange={e => setEmail(e.target.value)}
               placeholder="your@email.com"
               required
-              className="w-full bg-ink-900 border border-ink-700 rounded-lg px-4 py-3 text-sm
-                         text-ink-200 placeholder-ink-600 outline-none transition-all
-                         focus:border-gold-500 focus:ring-1 focus:ring-gold-500/30"
-              style={{ fontFamily: 'var(--font-mono)' }}
+              className="w-full rounded-lg px-4 py-3 text-sm outline-none transition-all"
+              style={{
+                background: 'var(--bg-surface)',
+                border: '1px solid var(--border-mid)',
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-mono)',
+              }}
+              onFocus={e => e.target.style.borderColor = 'var(--gold-main)'}
+              onBlur={e => e.target.style.borderColor = 'var(--border-mid)'}
             />
           </div>
 
           {error && (
-            <div className="flex items-start gap-2 p-3 rounded-lg text-xs text-coral-300"
-              style={{ background: 'rgba(212,71,46,0.1)', border: '1px solid rgba(212,71,46,0.2)' }}>
-              <span className="mt-0.5">⚠</span>
-              <span>{error}</span>
+            <div className="flex items-start gap-2 p-3 rounded-lg text-xs"
+              style={{ background: 'var(--coral-bg)', color: 'var(--coral-main)', border: '1px solid var(--coral-main)20' }}>
+              <span>⚠</span><span>{error}</span>
             </div>
           )}
 
-          <button
-            type="submit"
-            disabled={loading || !email}
-            className="w-full py-3 rounded-lg text-sm font-medium transition-all duration-200
-                       disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99]"
-            style={{
-              background: loading ? 'rgba(184,137,26,0.3)' : '#B8891A',
-              color: loading ? '#E8C547' : '#0A0A0F',
-            }}
-          >
+          <button type="submit" disabled={loading || !email}
+            className="w-full py-3 rounded-lg text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed active:scale-[0.99]"
+            style={{ background: 'var(--gold-main)', color: '#fff' }}>
             {loading ? (
               <span className="flex items-center justify-center gap-2">
-                <span className="inline-block w-3 h-3 border border-current border-t-transparent rounded-full animate-spin" />
-                Verifying...
+                <span className="w-3 h-3 border border-white border-t-transparent rounded-full animate-spin" />
+                Verifying…
               </span>
             ) : 'Access Dashboard'}
           </button>
         </form>
 
-        <p className="text-center text-xs text-ink-700 mt-6 font-mono">
+        <p className="text-center text-xs font-mono mt-6" style={{ color: 'var(--text-muted)', opacity: 0.6 }}>
           Access is by invitation only.
         </p>
       </div>

@@ -90,7 +90,7 @@ function AIResearchBar() {
             <div className="max-w-[86%] rounded-xl px-4 py-3 text-sm leading-relaxed"
               style={msg.role === 'user'
                 ? { background: 'rgba(184,137,26,0.15)', border: '1px solid rgba(184,137,26,0.25)', color: '#E8E8F0' }
-                : { background: '#1A1A24', border: '1px solid #242432', color: '#9494AF' }}>
+                : { background: 'var(--bg-surface)', border: '1px solid #242432', color: 'var(--text-tertiary)' }}>
               {msg.role === 'assistant' && (
                 <span className="text-[9px] font-mono text-gold-500 block mb-1.5 tracking-widest">CLAUDE OPUS</span>
               )}
@@ -101,7 +101,7 @@ function AIResearchBar() {
         {loading && streaming && (
           <div className="flex justify-start">
             <div className="max-w-[86%] rounded-xl px-4 py-3 text-sm leading-relaxed"
-              style={{ background: '#1A1A24', border: '1px solid #242432', color: '#9494AF' }}>
+              style={{ background: 'var(--bg-surface)', border: '1px solid #242432', color: 'var(--text-tertiary)' }}>
               <span className="text-[9px] font-mono text-gold-500 block mb-1.5 tracking-widest">CLAUDE OPUS</span>
               <p className="whitespace-pre-wrap">{streaming}
                 <span className="inline-block w-1 h-4 bg-gold-500 animate-pulse ml-0.5 align-middle" />
@@ -111,7 +111,7 @@ function AIResearchBar() {
         )}
         {loading && !streaming && (
           <div className="flex justify-start">
-            <div className="rounded-xl px-4 py-3" style={{ background: '#1A1A24', border: '1px solid #242432' }}>
+            <div className="rounded-xl px-4 py-3" style={{ background: 'var(--bg-surface)', border: '1px solid #242432' }}>
               <div className="flex gap-1">
                 {[0,1,2].map(i => (
                   <div key={i} className="w-1.5 h-1.5 rounded-full bg-gold-500 animate-bounce"

@@ -16,7 +16,7 @@ function CommentCard({ comment, isAdmin, onResolve }) {
     <div className={`card p-5 transition-opacity animate-fade-up ${isResolved ? 'opacity-50' : ''}`}>
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono shrink-0" style={{ background: '#1A1A24', border: '1px solid #32324A' }}>
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono shrink-0" style={{ background: 'var(--bg-surface)', border: '1px solid #32324A' }}>
             {(p?.['Author Name'] || p?.['Author Email'] || '?')[0]?.toUpperCase()}
           </div>
           <div>
@@ -36,7 +36,7 @@ function CommentCard({ comment, isAdmin, onResolve }) {
       </div>
       {p?.Section && (
         <div className="mb-2">
-          <span className="text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-wider" style={{ background: '#242432', color: '#6B6B8F', border: '1px solid #32324A' }}>{p.Section}</span>
+          <span className="text-[9px] px-2 py-0.5 rounded font-mono uppercase tracking-wider" style={{ background: 'var(--bg-raised)', color: '#6B6B8F', border: '1px solid #32324A' }}>{p.Section}</span>
         </div>
       )}
       <p className="text-sm text-ink-300 leading-relaxed">{p?.Comment || ''}</p>
@@ -116,7 +116,7 @@ export default function CommentsPage() {
               {['open','resolved','all'].map(f => (
                 <button key={f} onClick={() => setStatusFilter(f)}
                   className="text-[10px] px-3 py-1.5 rounded-full font-mono capitalize transition-all"
-                  style={{ background: statusFilter===f ? 'rgba(184,137,26,0.15)' : '#1A1A24', color: statusFilter===f ? '#E8C547' : '#6B6B8F', border: `1px solid ${statusFilter===f ? 'rgba(184,137,26,0.3)' : '#32324A'}` }}>
+                  style={{ background: statusFilter===f ? 'rgba(184,137,26,0.15)' : 'var(--bg-surface)', color: statusFilter===f ? '#E8C547' : '#6B6B8F', border: `1px solid ${statusFilter===f ? 'rgba(184,137,26,0.3)' : 'var(--border-mid)'}` }}>
                   {f}
                 </button>
               ))}
@@ -152,7 +152,7 @@ export default function CommentsPage() {
                     {['Normal','High','Low'].map(p => (
                       <button key={p} onClick={() => setPriority(p)}
                         className="flex-1 text-[10px] py-1.5 rounded-lg font-mono transition-all"
-                        style={{ background: priority===p ? 'rgba(184,137,26,0.15)' : '#1A1A24', color: priority===p ? '#E8C547' : '#6B6B8F', border: `1px solid ${priority===p ? 'rgba(184,137,26,0.3)' : '#32324A'}` }}>
+                        style={{ background: priority===p ? 'rgba(184,137,26,0.15)' : 'var(--bg-surface)', color: priority===p ? '#E8C547' : '#6B6B8F', border: `1px solid ${priority===p ? 'rgba(184,137,26,0.3)' : 'var(--border-mid)'}` }}>
                         {p}
                       </button>
                     ))}
